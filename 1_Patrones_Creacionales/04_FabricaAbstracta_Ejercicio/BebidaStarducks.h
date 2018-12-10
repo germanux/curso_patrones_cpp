@@ -56,7 +56,7 @@ public:
 class Chocolate : public Bebida {
 public:
 	Chocolate() {}
-	virtual void ponAzucar() { };
+	virtual void ponAzucar() { azucar = true; };
 	virtual void ponLeche() { leche = true; };
 	virtual void ponNata() { nata = true; };
 	virtual void ponDescafeinado() { };
@@ -68,35 +68,3 @@ public:
 	}
 };
 
-class StarducksFactory {
-public:
-	//creamos una bebida con unoos complementos
-	Bebida* dameBebida(tipoBebida tipo, std::list<complementos> complementos) {
-		Bebida* nuevaBebida;
-
-		//Creamos la bebida en funcion del tipoBebida
-		if (tipo == tipoBebida::Cafe) { nuevaBebida = new Cafe(); }
-		else if (tipo == tipoBebida::Chocolate) { nuevaBebida = new Chocolate(); }
-		else if (tipo == tipoBebida::Te) { nuevaBebida = new Te(); }
-		else { return NULL; }//si no es de ninguno de estos, devuevlo NULL
-
-		//le ponemos a la bebida los complementos
-		//Auto -> dejamos al compilador que le asigne el tipo (C++11)
-		for (auto i : complementos) {
-			if (i == complementos::Azucar) {
-				nuevaBebida->ponAzucar();
-			}
-			else if (i == complementos::Descafeinado) {
-				nuevaBebida->ponDescafeinado();
-			}
-			else if (i == complementos::Leche) {
-				nuevaBebida->ponLeche();
-			}
-			else if (i == complementos::Nata) {
-				nuevaBebida->ponNata();
-			}
-		}
-
-		return nuevaBebida;
-	}
-};
